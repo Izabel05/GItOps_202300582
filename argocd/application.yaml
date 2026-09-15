@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sa-platform-p8
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: sa-platform
+    app.kubernetes.io/managed-by: gitops
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/Izabel05/Practicas-SA-B-202300582.git
+      targetRevision: main
+      path: P8/charts/sa-platform
+      helm:
+        valueFiles:
+          - $values/environments/dev/values-p8.yaml
+    - repoURL: https://github.com/Izabel05/GItOps_202300582.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sa-p8
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
