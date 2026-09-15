@@ -9,9 +9,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/Izabel05/Practicas-SA-B-202300582.git
+    - repoURL: https://github.com/Izabel05/GItOps_202300582.git
       targetRevision: main
-      path: P8/charts/sa-platform
+      path: charts/sa-platform
       helm:
         valueFiles:
           - $values/environments/dev/values-p8.yaml
@@ -26,5 +26,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
