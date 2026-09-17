@@ -27,7 +27,7 @@ api-gateway:
     stableService: api-gateway
     canaryService: api-gateway-canary
     maxSurge: 100%
-    maxUnavailable: 0
+    maxUnavailable: 50%
     steps:
       - setWeight: 20
       - pause: {duration: 30s}
