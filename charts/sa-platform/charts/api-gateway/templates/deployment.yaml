@@ -19,6 +19,8 @@ spec:
     canary:
       stableService: {{ .Values.rollout.stableService }}
       canaryService: {{ .Values.rollout.canaryService }}
+      maxSurge: {{ default "25%" .Values.rollout.maxSurge | quote }}
+      maxUnavailable: {{ default 0 .Values.rollout.maxUnavailable }}
       steps:
         {{- toYaml .Values.rollout.steps | nindent 8 }}
     {{- else }}
