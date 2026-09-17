@@ -2,7 +2,7 @@ global:
   namespace: sa-p8
   imagePullSecrets:
     - name: ghcr-pull-secret
-  rolloutNonce: "2026-09-17-controlled-failure-v10"
+  rolloutNonce: "2026-09-17-restored-v11"
 
 externalSecrets:
   enabled: true
@@ -25,7 +25,7 @@ api-gateway:
   upstreams:
     resolver: kube-dns.kube-system.svc.cluster.local
     autenticacion: autenticacion-ms.sa-p8.svc.cluster.local:8081
-    catalogo: catalogo-ms-invalid.sa-p8.svc.cluster.local:8082
+    catalogo: catalogo-ms.sa-p8.svc.cluster.local:8082
     prestamos: prestamos-ms.sa-p8.svc.cluster.local:8083
     multas: multas-ms.sa-p8.svc.cluster.local:8084
   rollout:
