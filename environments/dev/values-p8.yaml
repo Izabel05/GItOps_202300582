@@ -2,6 +2,7 @@ global:
   namespace: sa-p8
   imagePullSecrets:
     - name: ghcr-pull-secret
+  rolloutNonce: "2026-09-17-secrets-v3"
 
 externalSecrets:
   enabled: true

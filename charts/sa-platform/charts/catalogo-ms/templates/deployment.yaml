@@ -21,6 +21,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        p8-secret-refresh: {{ default "initial" .Values.global.rolloutNonce | quote }}
       labels:
         {{- include "catalogo-ms.selectorLabels" . | nindent 8 }}
     spec:

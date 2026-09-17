@@ -15,7 +15,9 @@ spec:
     matchLabels: {{- include "multas-ms.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      annotations: {checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        p8-secret-refresh: {{ default "initial" .Values.global.rolloutNonce | quote }}
       labels: {{- include "multas-ms.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ include "multas-ms.serviceAccountName" . }}
