@@ -21,7 +21,7 @@ api-gateway:
   rollout:
     enabled: true
     stableService: api-gateway
-    canaryService: gateway-health
+    canaryService: api-gateway-canary
     steps:
       - setWeight: 20
       - pause: {duration: 30s}
