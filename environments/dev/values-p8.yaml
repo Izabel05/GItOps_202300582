@@ -1,5 +1,7 @@
 global:
   namespace: sa-p8
+  imagePullSecrets:
+    - name: ghcr-pull-secret
 
 externalSecrets:
   enabled: true
@@ -19,7 +21,7 @@ api-gateway:
   rollout:
     enabled: true
     stableService: api-gateway
-    canaryService: api-gateway-canary
+    canaryService: gateway-health
     steps:
       - setWeight: 20
       - pause: {duration: 30s}
