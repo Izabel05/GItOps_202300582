@@ -74,6 +74,7 @@ multas-ms:
     tag: v1.2.2
 
 cronjob2:
+  schedule: "* * * * *"
   concurrencyPolicy: Replace
   image:
     repository: ghcr.io/izabel05/sa-cronjobs-worker
