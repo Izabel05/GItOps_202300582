@@ -15,7 +15,10 @@ api-gateway:
     repository: ghcr.io/izabel05/sa-api-gateway
     tag: v1.2.2
   autoscaling:
-    enabled: false
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 4
+    targetCPUUtilizationPercentage: 70
   service:
     type: ClusterIP
     port: 8080
