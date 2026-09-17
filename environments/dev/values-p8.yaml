@@ -2,7 +2,7 @@ global:
   namespace: sa-p8
   imagePullSecrets:
     - name: ghcr-pull-secret
-  rolloutNonce: "2026-09-17-integration-v8"
+  rolloutNonce: "2026-09-17-integration-v9"
 
 externalSecrets:
   enabled: true
@@ -22,6 +22,12 @@ api-gateway:
   service:
     type: ClusterIP
     port: 8080
+  upstreams:
+    resolver: kube-dns.kube-system.svc.cluster.local
+    autenticacion: autenticacion-ms.sa-p8.svc.cluster.local:8081
+    catalogo: catalogo-ms.sa-p8.svc.cluster.local:8082
+    prestamos: prestamos-ms.sa-p8.svc.cluster.local:8083
+    multas: multas-ms.sa-p8.svc.cluster.local:8084
   rollout:
     enabled: true
     stableService: api-gateway
@@ -58,6 +64,8 @@ prestamos-ms:
   image:
     repository: ghcr.io/izabel05/sa-prestamos-ms
     tag: v1.2.2
+  dependencies:
+    catalogUrl: http://catalogo-ms.sa-p8.svc.cluster.local:8082
 
 multas-ms:
   fullnameOverride: multas-ms
