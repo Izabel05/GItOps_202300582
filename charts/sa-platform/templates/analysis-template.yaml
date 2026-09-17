@@ -35,10 +35,5 @@ spec:
                     command: [sh, -c]
                     args:
                       - >-
-                        set -eu;
-                        for route in auth catalogo prestamos multas; do
-                          curl --fail --silent --show-error --max-time 5
-                          "http://api-gateway-canary:8080/health/$route" >/dev/null;
-                        done;
-                        echo 1
+                        set -eu; for route in auth catalogo prestamos multas; do curl --fail --silent --show-error --max-time 5 "http://api-gateway-canary:8080/health/$route" >/dev/null; done; echo 1
 {{- end }}
