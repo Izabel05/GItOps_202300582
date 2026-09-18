@@ -1,6 +1,10 @@
 global:
   namespace: sa-p6
 
+externalSecrets:
+  enabled: false
+  secretStoreName: cluster-secret-store
+
 # En P6 PostgreSQL se consume desde Neon. Estos subcharts permanecen
 # disponibles para desarrollo local, pero no se despliegan en GKE.
 auth-database:
@@ -88,37 +92,23 @@ api-gateway:
 
 autenticacion-ms:
   fullnameOverride: autenticacion-ms
-  database:
-    secretName: auth-postgresql-credentials
-    secretKey: database-url
+  database: {secretName: auth-postgresql-credentials, secretKey: database-url}
 
 catalogo-ms:
   fullnameOverride: catalogo-ms
-  database:
-    secretName: catalog-postgresql-credentials
-    secretKey: database-url
+  database: {secretName: catalog-postgresql-credentials, secretKey: database-url}
 
 prestamos-ms:
   fullnameOverride: prestamos-ms
-  database:
-    secretName: loans-postgresql-credentials
-    secretKey: database-url
+  database: {secretName: loans-postgresql-credentials, secretKey: database-url}
   dependencies:
     catalogUrl: http://catalogo-ms.sa-p6.svc.cluster.local:8082
-  rabbitmq:
-    secretName: rabbitmq-credentials
-    secretKey: amqp-url
-    queue: multa.requerida
+  rabbitmq: {secretName: rabbitmq-credentials, secretKey: amqp-url, queue: multa.requerida}
 
 rabbitmq:
   fullnameOverride: rabbitmq
 
 multas-ms:
   fullnameOverride: multas-ms
-  database:
-    secretName: fines-postgresql-credentials
-    secretKey: database-url
-  rabbitmq:
-    secretName: rabbitmq-credentials
-    secretKey: amqp-url
-    queue: multa.requerida
+  database: {secretName: fines-postgresql-credentials, secretKey: database-url}
+  rabbitmq: {secretName: rabbitmq-credentials, secretKey: amqp-url, queue: multa.requerida}
