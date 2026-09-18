@@ -5,10 +5,7 @@ image:
   tag: "17-alpine"
   pullPolicy: IfNotPresent
 
-auth:
-  username: auth_user
-  password: ""
-  database: auth_db
+auth: {username: auth_user, password: "", database: auth_db}
 
 service:
   port: 5432
