@@ -17,9 +17,7 @@ service:
 config:
   logLevel: info
 
-database:
-  secretName: catalog-postgresql-credentials
-  secretKey: database-url
+database: {secretName: catalog-postgresql-credentials, secretKey: database-url}
 
 resources:
   requests:
