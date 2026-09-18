@@ -18,9 +18,7 @@ config:
   jwtDurationMinutes: 60
   logLevel: info
 
-database:
-  secretName: auth-postgresql-credentials
-  secretKey: database-url
+database: {secretName: auth-postgresql-credentials, secretKey: database-url}
 
 auth:
   jwtSecret: ""
