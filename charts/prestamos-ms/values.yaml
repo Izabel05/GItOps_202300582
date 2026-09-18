@@ -12,15 +12,10 @@ service:
   port: 8083
 config:
   logLevel: info
-database:
-  secretName: loans-postgresql-credentials
-  secretKey: database-url
+database: {secretName: loans-postgresql-credentials, secretKey: database-url}
 dependencies:
   catalogUrl: http://catalogo-ms:8082
-rabbitmq:
-  secretName: rabbitmq-credentials
-  secretKey: amqp-url
-  queue: multa.requerida
+rabbitmq: {secretName: rabbitmq-credentials, secretKey: amqp-url, queue: multa.requerida}
 resources:
   requests: {cpu: 50m, memory: 96Mi}
   limits: {cpu: 300m, memory: 192Mi}
