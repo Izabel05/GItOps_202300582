@@ -1,8 +1,8 @@
 replicaCount: 2
 fullnameOverride: ""
 image:
-  repository: sa-p6/prestamos-ms
-  tag: "0.2.2"
+  repository: ghcr.io/izabel05/sa-prestamos-ms
+  tag: "v1.2.2"
   pullPolicy: IfNotPresent
 serviceAccount:
   create: true
@@ -12,10 +12,15 @@ service:
   port: 8083
 config:
   logLevel: info
-database: {secretName: loans-postgresql-credentials, secretKey: database-url}
+database:
+  secretName: loans-postgresql-credentials
+  secretKey: database-url
 dependencies:
   catalogUrl: http://catalogo-ms:8082
-rabbitmq: {secretName: rabbitmq-credentials, secretKey: amqp-url, queue: multa.requerida}
+rabbitmq:
+  secretName: rabbitmq-credentials
+  secretKey: amqp-url
+  queue: multa.requerida
 resources:
   requests: {cpu: 50m, memory: 96Mi}
   limits: {cpu: 300m, memory: 192Mi}

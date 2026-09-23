@@ -1,8 +1,8 @@
 apiVersion: v2
 name: sa-platform
-description: Chart GitOps de la plataforma de biblioteca digital para la Practica 8
+description: Chart GitOps de la plataforma de biblioteca digital para la Practica 9
 type: application
-version: 0.4.0
+version: 0.5.0
 appVersion: "0.1.0"
 
 dependencies:

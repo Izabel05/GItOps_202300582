@@ -2,8 +2,8 @@ replicaCount: 2
 fullnameOverride: ""
 
 image:
-  repository: sa-p6/catalogo-ms
-  tag: "0.1.0"
+  repository: ghcr.io/izabel05/sa-catalogo-ms
+  tag: "v1.2.2"
   pullPolicy: IfNotPresent
 
 serviceAccount:
@@ -17,7 +17,9 @@ service:
 config:
   logLevel: info
 
-database: {secretName: catalog-postgresql-credentials, secretKey: database-url}
+database:
+  secretName: catalog-postgresql-credentials
+  secretKey: database-url
 
 resources:
   requests:

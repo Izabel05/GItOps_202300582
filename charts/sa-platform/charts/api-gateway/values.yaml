@@ -5,9 +5,9 @@ platformVersion: "0.2.1"
 fullnameOverride: ""
 
 image:
-  repository: sa-p6/api-gateway
+  repository: ghcr.io/izabel05/sa-api-gateway
   pullPolicy: IfNotPresent
-  tag: "0.1.1"
+  tag: "v1.2.2"
 
 imagePullSecrets: []
 
@@ -69,8 +69,3 @@ securityContext:
   capabilities:
     drop:
       - ALL
-
-rollout:
-  enabled: false
-  stableService: api-gateway
-  canaryService: api-gateway-canary

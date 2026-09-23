@@ -17,11 +17,19 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        p8-secret-refresh: {{ default "initial" .Values.global.rolloutNonce | quote }}
       labels: {{- include "prestamos-ms.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ include "prestamos-ms.serviceAccountName" . }}
       automountServiceAccountToken: false
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    {{- include "prestamos-ms.selectorLabels" . | nindent 20 }}
       securityContext: {{- toYaml .Values.podSecurityContext | nindent 8 }}
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:

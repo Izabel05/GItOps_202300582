@@ -1,6 +1,6 @@
 replicaCount: 2
 fullnameOverride: ""
-image: {repository: sa-p6/multas-ms, tag: "0.1.3", pullPolicy: IfNotPresent}
+image: {repository: ghcr.io/izabel05/sa-multas-ms, tag: "v1.2.2", pullPolicy: IfNotPresent}
 serviceAccount: {create: true, name: ""}
 service: {type: ClusterIP, port: 8084}
 config: {logLevel: info, dailyRate: "5.00"}

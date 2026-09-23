@@ -2,8 +2,8 @@ replicaCount: 2
 fullnameOverride: ""
 
 image:
-  repository: sa-p6/autenticacion-ms
-  tag: "0.1.0"
+  repository: ghcr.io/izabel05/sa-autenticacion-ms
+  tag: "v1.2.2"
   pullPolicy: IfNotPresent
 
 serviceAccount:
@@ -18,7 +18,9 @@ config:
   jwtDurationMinutes: 60
   logLevel: info
 
-database: {secretName: auth-postgresql-credentials, secretKey: database-url}
+database:
+  secretName: auth-postgresql-credentials
+  secretKey: database-url
 
 auth:
   jwtSecret: ""
