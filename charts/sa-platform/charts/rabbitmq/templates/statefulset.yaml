@@ -31,4 +31,5 @@ spec:
         {{- with .Values.persistence.storageClassName }}
         storageClassName: {{ . | quote }}
         {{- end }}
+        volumeMode: Filesystem
         resources: {requests: {storage: {{ .Values.persistence.size }}}}
