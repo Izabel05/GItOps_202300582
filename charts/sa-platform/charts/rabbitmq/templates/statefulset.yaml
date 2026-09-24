@@ -25,7 +25,9 @@ spec:
           resources: {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts: [{name: data, mountPath: /var/lib/rabbitmq}]
   volumeClaimTemplates:
-    - metadata: {name: data}
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata: {name: data}
       spec:
         accessModes: [ReadWriteOnce]
         {{- with .Values.persistence.storageClassName }}
