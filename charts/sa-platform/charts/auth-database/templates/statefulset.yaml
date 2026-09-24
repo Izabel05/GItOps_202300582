@@ -76,7 +76,9 @@ spec:
           configMap:
             name: {{ include "auth-database.fullname" . }}-init
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: data
         labels:
           {{- include "auth-database.labels" . | nindent 10 }}
