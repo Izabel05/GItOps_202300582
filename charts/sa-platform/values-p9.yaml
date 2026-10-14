@@ -2,7 +2,7 @@ global:
   namespace: sa-p9
   imagePullSecrets:
     - name: ghcr-pull-secret
-  rolloutNonce: "2026-10-14-p10-stable"
+  rolloutNonce: "2026-10-14-p10-stable-retry"
 
 externalSecrets:
   enabled: true

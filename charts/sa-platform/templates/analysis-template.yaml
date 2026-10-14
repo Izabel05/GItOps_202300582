@@ -19,7 +19,7 @@ spec:
           address: http://observability-kube-prometh-prometheus.observability.svc.cluster.local:9090
           query: |
             (sum(rate(library_http_requests_total{service="api-gateway",revision="{{ "{{args.latest-hash}}" }}",status_code=~"5.."}[2m])) or vector(0))
-            / clamp_min(sum(rate(library_http_requests_total{service="api-gateway",revision="{{ "{{args.latest-hash}}" }}"}[2m])), 0.001)
+            / clamp_min((sum(rate(library_http_requests_total{service="api-gateway",revision="{{ "{{args.latest-hash}}" }}"}[2m])) or vector(0)), 0.001)
     - name: candidate-p95-latency
       interval: 20s
       count: 4
@@ -31,5 +31,5 @@ spec:
           query: |
             histogram_quantile(0.95,
               sum by (le) (rate(library_http_request_duration_seconds_bucket{service="api-gateway",revision="{{ "{{args.latest-hash}}" }}"}[2m]))
-            )
+            ) or vector(0)
 {{- end }}
