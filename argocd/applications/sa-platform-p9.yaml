@@ -18,6 +18,17 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: sa-p9
+  ignoreDifferences:
+    - group: ""
+      kind: Service
+      name: api-gateway
+      namespace: sa-p9
+      jsonPointers: [/spec/selector]
+    - group: ""
+      kind: Service
+      name: api-gateway-canary
+      namespace: sa-p9
+      jsonPointers: [/spec/selector]
   syncPolicy:
     automated:
       prune: true
