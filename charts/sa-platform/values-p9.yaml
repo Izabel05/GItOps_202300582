@@ -47,17 +47,17 @@ api-gateway:
     maxUnavailable: 50%
     steps:
       - setWeight: 20
-      - pause: {duration: 30s}
+      - pause: {duration: 15s}
       - analysis:
           templates: [{templateName: gateway-slo-prometheus}]
           args: [{name: latest-hash, valueFrom: {podTemplateHashValue: Latest}}]
       - setWeight: 50
-      - pause: {duration: 30s}
+      - pause: {duration: 15s}
       - analysis:
           templates: [{templateName: gateway-slo-prometheus}]
           args: [{name: latest-hash, valueFrom: {podTemplateHashValue: Latest}}]
       - setWeight: 80
-      - pause: {duration: 30s}
+      - pause: {duration: 15s}
       - analysis:
           templates: [{templateName: gateway-slo-prometheus}]
           args: [{name: latest-hash, valueFrom: {podTemplateHashValue: Latest}}]

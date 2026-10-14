@@ -10,8 +10,8 @@ spec:
     - name: latest-hash
   metrics:
     - name: candidate-error-rate
-      interval: 20s
-      count: 4
+      interval: 10s
+      count: 3
       failureLimit: 1
       successCondition: len(result) > 0 && result[0] < 0.05
       provider:
@@ -21,8 +21,8 @@ spec:
             (sum(rate(library_http_requests_total{service="api-gateway",revision="{{ "{{args.latest-hash}}" }}",status_code=~"5.."}[2m])) or vector(0))
             / clamp_min((sum(rate(library_http_requests_total{service="api-gateway",revision="{{ "{{args.latest-hash}}" }}"}[2m])) or vector(0)), 0.001)
     - name: candidate-p95-latency
-      interval: 20s
-      count: 4
+      interval: 10s
+      count: 3
       failureLimit: 1
       successCondition: len(result) > 0 && result[0] < 0.75
       provider:
