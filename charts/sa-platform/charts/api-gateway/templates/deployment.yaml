@@ -90,18 +90,21 @@ spec:
             httpGet:
               path: /health
               port: http
+            timeoutSeconds: 3
             failureThreshold: {{ .Values.probes.startup.failureThreshold }}
             periodSeconds: {{ .Values.probes.startup.periodSeconds }}
           readinessProbe:
             httpGet:
               path: /health
               port: http
+            timeoutSeconds: 3
             initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
             periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
           livenessProbe:
             httpGet:
               path: /health
               port: http
+            timeoutSeconds: 3
             initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
           resources:
