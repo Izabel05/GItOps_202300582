@@ -51,6 +51,8 @@ spec:
             - configMapRef:
                 name: {{ include "catalogo-ms.fullname" . }}
           env:
+            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+              value: http://otel-collector.observability.svc.cluster.local:4318/v1/traces
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

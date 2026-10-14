@@ -67,6 +67,25 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: AUTENTICACION_URL
+              value: http://{{ .Values.upstreams.autenticacion }}
+            - name: CATALOGO_URL
+              value: http://{{ .Values.upstreams.catalogo }}
+            - name: PRESTAMOS_URL
+              value: http://{{ .Values.upstreams.prestamos }}
+            - name: MULTAS_URL
+              value: http://{{ .Values.upstreams.multas }}
+            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+              value: http://otel-collector.observability.svc.cluster.local:4318/v1/traces
+            - name: SERVICE_VERSION
+              value: {{ default "stable" .Values.observability.version | quote }}
+            - name: POD_TEMPLATE_HASH
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['rollouts-pod-template-hash']
+            - name: INJECT_LATENCY_MS
+              value: {{ default 0 .Values.observability.injectLatencyMs | quote }}
           startupProbe:
             httpGet:
               path: /health
@@ -87,16 +106,3 @@ spec:
             periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          volumeMounts:
-            - name: nginx-config
-              mountPath: /etc/nginx/nginx.conf
-              subPath: nginx.conf
-              readOnly: true
-            - name: temporary-files
-              mountPath: /tmp
-      volumes:
-        - name: nginx-config
-          configMap:
-            name: {{ include "api-gateway.fullname" . }}
-        - name: temporary-files
-          emptyDir: {}

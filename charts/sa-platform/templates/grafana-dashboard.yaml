@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sa-p10-grafana-dashboard
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    grafana_dashboard: "1"
+data:
+  sa-p10-golden-signals.json: |-
+{{ .Files.Get "files/sa-p10-golden-signals.json" | indent 4 }}

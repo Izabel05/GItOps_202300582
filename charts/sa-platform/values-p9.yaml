@@ -26,7 +26,7 @@ api-gateway:
     name: api-gateway
   image:
     repository: ghcr.io/izabel05/sa-api-gateway
-    tag: "v1.2.2"
+    tag: "v1.2.3"
   autoscaling:
     enabled: true
     minReplicas: 2
@@ -42,19 +42,28 @@ api-gateway:
     enabled: true
     stableService: api-gateway
     canaryService: api-gateway-canary
-    analysisTemplate: gateway-integration
+    analysisTemplate: gateway-slo-prometheus
     maxSurge: 100%
     maxUnavailable: 50%
     steps:
       - setWeight: 20
       - pause: {duration: 30s}
-      - analysis: {templates: [{templateName: gateway-integration}]}
+      - analysis:
+          templates: [{templateName: gateway-slo-prometheus}]
+          args: [{name: latest-hash, valueFrom: {podTemplateHashValue: Latest}}]
       - setWeight: 50
       - pause: {duration: 30s}
-      - analysis: {templates: [{templateName: gateway-integration}]}
+      - analysis:
+          templates: [{templateName: gateway-slo-prometheus}]
+          args: [{name: latest-hash, valueFrom: {podTemplateHashValue: Latest}}]
       - setWeight: 80
       - pause: {duration: 30s}
-      - analysis: {templates: [{templateName: gateway-integration}]}
+      - analysis:
+          templates: [{templateName: gateway-slo-prometheus}]
+          args: [{name: latest-hash, valueFrom: {podTemplateHashValue: Latest}}]
+  observability:
+    version: stable
+    injectLatencyMs: 0
 
 autenticacion-ms:
   fullnameOverride: autenticacion-ms
@@ -63,7 +72,7 @@ autenticacion-ms:
     name: autenticacion-ms
   image:
     repository: ghcr.io/izabel05/sa-autenticacion-ms
-    tag: "v1.2.2"
+    tag: "v1.2.3"
   auth:
     secretName: jwt-credentials
   database:
@@ -77,7 +86,7 @@ catalogo-ms:
     name: catalogo-ms
   image:
     repository: ghcr.io/izabel05/sa-catalogo-ms
-    tag: "v1.2.2"
+    tag: "v1.2.3"
 
 prestamos-ms:
   fullnameOverride: prestamos-ms
@@ -86,7 +95,7 @@ prestamos-ms:
     name: prestamos-ms
   image:
     repository: ghcr.io/izabel05/sa-prestamos-ms
-    tag: "v1.2.2"
+    tag: "v1.2.3"
   dependencies:
     catalogUrl: http://catalogo-ms.sa-p9.svc.cluster.local:8082
 
@@ -97,7 +106,7 @@ multas-ms:
     name: multas-ms
   image:
     repository: ghcr.io/izabel05/sa-multas-ms
-    tag: "v1.2.2"
+    tag: "v1.2.3"
 
 cronjob2:
   concurrencyPolicy: Forbid
