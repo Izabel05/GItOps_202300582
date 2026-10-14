@@ -2,7 +2,7 @@ global:
   namespace: sa-p9
   imagePullSecrets:
     - name: ghcr-pull-secret
-  rolloutNonce: "2026-10-14-p10-latency-failure-ready"
+  rolloutNonce: "2026-10-14-p10-recovered"
 
 externalSecrets:
   enabled: true
@@ -63,7 +63,7 @@ api-gateway:
           args: [{name: latest-hash, valueFrom: {podTemplateHashValue: Latest}}]
   observability:
     version: stable
-    injectLatencyMs: 1200
+    injectLatencyMs: 0
 
 autenticacion-ms:
   fullnameOverride: autenticacion-ms
