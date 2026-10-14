@@ -15,6 +15,9 @@ spec:
       values: |
         fullnameOverride: otel-collector
         mode: daemonset
+        service:
+          enabled: true
+          internalTrafficPolicy: Cluster
         image: {repository: otel/opentelemetry-collector-contrib}
         presets:
           logsCollection: {enabled: true, includeCollectorLogs: false}
