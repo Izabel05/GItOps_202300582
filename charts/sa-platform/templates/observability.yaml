@@ -40,14 +40,14 @@ spec:
           labels: {severity: critical, slo: availability}
           annotations:
             summary: Presupuesto de disponibilidad consumiéndose rápidamente
-            runbook_url: https://github.com/Izabel05/Practicas-SA-B-202300582/blob/main/P10/runbooks/availability-fast-burn.md
+            runbook_url: https://github.com/Izabel05/Practicas-SA-B-202300582/blob/main/P10/README.md#runbook-de-disponibilidad
         - alert: LatencyErrorBudgetFastBurn
           expr: sa:slo_latency:error_budget_consumed > 14.4
           for: 2m
           labels: {severity: critical, slo: latency}
           annotations:
             summary: Presupuesto de latencia consumiéndose rápidamente
-            runbook_url: https://github.com/Izabel05/Practicas-SA-B-202300582/blob/main/P10/runbooks/latency-fast-burn.md
+            runbook_url: https://github.com/Izabel05/Practicas-SA-B-202300582/blob/main/P10/README.md#runbook-de-latencia
 ---
 apiVersion: apps/v1
 kind: Deployment
