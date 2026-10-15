@@ -21,10 +21,6 @@ spec:
         grafana:
           enabled: true
           defaultDashboardsEnabled: true
-          grafana.ini:
-            auth.anonymous:
-              enabled: true
-              org_role: Viewer
           sidecar:
             dashboards:
               enabled: true
