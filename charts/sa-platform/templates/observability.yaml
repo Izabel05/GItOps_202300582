@@ -25,11 +25,11 @@ spec:
       interval: 30s
       rules:
         - record: sa:slo_availability:error_ratio_5m
-          expr: sum(rate(library_http_requests_total{status_code=~"5.."}[5m])) / clamp_min(sum(rate(library_http_requests_total[5m])), 0.001)
+          expr: (sum(rate(library_http_requests_total{status_code=~"5.."}[5m])) or vector(0)) / clamp_min(sum(rate(library_http_requests_total[5m])), 0.001)
         - record: sa:slo_availability:error_budget_consumed
           expr: sa:slo_availability:error_ratio_5m / (1 - 0.995)
         - record: sa:slo_latency:bad_ratio_5m
-          expr: 1 - (sum(rate(library_http_request_duration_seconds_bucket{le="0.75"}[5m])) / clamp_min(sum(rate(library_http_request_duration_seconds_count[5m])), 0.001))
+          expr: 1 - (sum(rate(library_http_request_duration_seconds_bucket{service="api-gateway",le="0.75"}[5m])) / clamp_min(sum(rate(library_http_request_duration_seconds_count{service="api-gateway"}[5m])), 0.001))
         - record: sa:slo_latency:error_budget_consumed
           expr: sa:slo_latency:bad_ratio_5m / (1 - 0.95)
     - name: sa-p10.slo.alerts
